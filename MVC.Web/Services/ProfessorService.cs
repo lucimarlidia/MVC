@@ -43,7 +43,6 @@ namespace MVC.Web.Services
 
             await _professorRepository.IncluirAsync(professor);
 
-            // Retornar o Id do professor recém-inserido
             return professor.Id;
         }
 
@@ -54,8 +53,60 @@ namespace MVC.Web.Services
 
             await _professorRepository.AlterarAsync(professor);
 
-            // Retornar o Id do professor atualizado
             return professor.Id;
+        }
+
+        public async Task<ProfessorViewModel> Selecionar(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("ID inválido.", nameof(id));
+            }
+
+            var professor = await _professorRepository.SelecionarAsync(id);
+            if (professor == null)
+            {
+                return null;
+            }
+
+            return new ProfessorViewModel
+            {
+                Id = professor.Id,
+                Nome = professor.Nome,
+                Email = professor.Email
+            };
+        }
+
+        public async Task<IEnumerable<ProfessorViewModel>> SelecionarTudo()
+        {
+            var professores = await _professorRepository.SelecionarTudoAsync();
+            return professores.Select(professor => new ProfessorViewModel
+            {
+                Id = professor.Id,
+                Nome = professor.Nome,
+                Email = professor.Email
+            });
+        }
+
+        public async Task<ProfessorViewModel> Atualizar(ProfessorViewModel professorViewModel)
+        {
+            var professor = await _professorRepository.SelecionarAsync(professorViewModel.Id.Value);
+            if (professor == null) return null;
+
+            professor.Nome = professorViewModel.Nome;
+            professor.Email = professorViewModel.Email;
+
+            await _professorRepository.AlterarAsync(professor);
+            return professorViewModel;
+        }
+
+        public async Task<bool> Excluir(int id)
+        {
+            var professor = await _professorRepository.SelecionarAsync(id);
+            if (professor == null) return false;
+
+            await _professorRepository.ExcluirAsync(id);
+            return true;
         }
     }
 }

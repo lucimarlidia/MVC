@@ -32,7 +32,6 @@ namespace MVC.Web.Services
             return await AtualizarAlunoAsync(aluno, alunoViewModel);
         }
 
-
         private async Task<int> InserirAlunoAsync(AlunoViewModel alunoViewModel)
         {
             var aluno = new Aluno
@@ -45,7 +44,6 @@ namespace MVC.Web.Services
 
             await _alunoRepository.IncluirAsync(aluno);
 
-            // Retornar o Id do aluno recém-inserido
             return aluno.Id;
         }
 
@@ -58,8 +56,61 @@ namespace MVC.Web.Services
 
             await _alunoRepository.AlterarAsync(aluno);
 
-            // Retornar o Id do aluno atualizado
             return aluno.Id;
+        }
+
+        public async Task<AlunoViewModel> Selecionar(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentException("ID inválido.", nameof(id));
+            }
+
+            var aluno = await _alunoRepository.SelecionarAsync(id);
+
+            if (aluno == null)
+            {
+                return null;
+            }
+
+            var alunoViewModel = new AlunoViewModel
+            {
+                Id = aluno.Id,
+                Nome = aluno.Nome,
+                Endereco = aluno.Endereco,
+                Email = aluno.Email,
+                Ativo = aluno.Ativo
+            };
+
+            return alunoViewModel;
+        }
+
+        public async Task<IEnumerable<Aluno>> SelecionarTudo()
+        {
+            return await _alunoRepository.SelecionarTudoAsync();
+        }
+
+        public async Task<AlunoViewModel> Atualizar(AlunoViewModel alunoViewModel)
+        {
+            var aluno = await _alunoRepository.SelecionarAsync(alunoViewModel.Id.Value);
+            if (aluno == null) return null;
+
+            aluno.Nome = alunoViewModel.Nome;
+            aluno.Endereco = alunoViewModel.Endereco;
+            aluno.Email = alunoViewModel.Email;
+            aluno.Ativo = alunoViewModel.Ativo;
+
+            await _alunoRepository.AlterarAsync(aluno);
+            return alunoViewModel;
+        }
+
+        public async Task<bool> Excluir(int id)
+        {
+            var aluno = await _alunoRepository.SelecionarAsync(id);
+            if (aluno == null) return false;
+
+            await _alunoRepository.ExcluirAsync(id);
+            return true;
         }
     }
 }

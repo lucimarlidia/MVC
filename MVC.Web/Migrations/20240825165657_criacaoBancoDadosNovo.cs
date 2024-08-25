@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MVC.Web.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicio : Migration
+    public partial class criacaoBancoDadosNovo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
