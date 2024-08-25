@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC.Web.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20240825165657_criacaoBancoDadosNovo")]
-    partial class criacaoBancoDadosNovo
+    [Migration("20240825180707_criacaobasemvc")]
+    partial class criacaobasemvc
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
