@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MVC.Web.Models.Entitidades;
+using MVC.Web.Models.Entities;
 
 namespace MVC.Web.Data
 {

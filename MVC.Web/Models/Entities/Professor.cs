@@ -1,4 +1,4 @@
-﻿namespace MVC.Web.Models.Entitidades
+﻿namespace MVC.Web.Models.Entities
 {
     public class Professor : IEntity
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MVC.Web.Models.Entitidades;
+using MVC.Web.Models.Entities;
 
 namespace MVC.Web.Data
 {

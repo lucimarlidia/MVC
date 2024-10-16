@@ -1,4 +1,4 @@
-﻿using MVC.Web.Models.Entitidades;
+﻿using MVC.Web.Models.Entities;
 using MVC.Web.Models.ViewModels;
 using MVC.Web.Repositories;
 

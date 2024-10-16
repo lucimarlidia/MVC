@@ -22,7 +22,7 @@ namespace MVC.Web.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MVC.Web.Models.Entitidades.Aluno", b =>
+            modelBuilder.Entity("MVC.Web.Models.Entities.Aluno", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,7 +50,7 @@ namespace MVC.Web.Migrations
                     b.ToTable("Aluno", (string)null);
                 });
 
-            modelBuilder.Entity("MVC.Web.Models.Entitidades.Curso", b =>
+            modelBuilder.Entity("MVC.Web.Models.Entities.Curso", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -82,7 +82,7 @@ namespace MVC.Web.Migrations
                     b.ToTable("Curso", (string)null);
                 });
 
-            modelBuilder.Entity("MVC.Web.Models.Entitidades.Matricula", b =>
+            modelBuilder.Entity("MVC.Web.Models.Entities.Matricula", b =>
                 {
                     b.Property<int>("IdCurso")
                         .HasColumnType("int");
@@ -106,7 +106,7 @@ namespace MVC.Web.Migrations
                     b.ToTable("Matricula", (string)null);
                 });
 
-            modelBuilder.Entity("MVC.Web.Models.Entitidades.Professor", b =>
+            modelBuilder.Entity("MVC.Web.Models.Entities.Professor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,9 +127,9 @@ namespace MVC.Web.Migrations
                     b.ToTable("Professor", (string)null);
                 });
 
-            modelBuilder.Entity("MVC.Web.Models.Entitidades.Curso", b =>
+            modelBuilder.Entity("MVC.Web.Models.Entities.Curso", b =>
                 {
-                    b.HasOne("MVC.Web.Models.Entitidades.Professor", "Professor")
+                    b.HasOne("MVC.Web.Models.Entities.Professor", "Professor")
                         .WithMany("Cursos")
                         .HasForeignKey("IdProfessor")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -138,15 +138,15 @@ namespace MVC.Web.Migrations
                     b.Navigation("Professor");
                 });
 
-            modelBuilder.Entity("MVC.Web.Models.Entitidades.Matricula", b =>
+            modelBuilder.Entity("MVC.Web.Models.Entities.Matricula", b =>
                 {
-                    b.HasOne("MVC.Web.Models.Entitidades.Aluno", "Aluno")
+                    b.HasOne("MVC.Web.Models.Entities.Aluno", "Aluno")
                         .WithMany("Matriculas")
                         .HasForeignKey("IdAluno")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MVC.Web.Models.Entitidades.Curso", "Curso")
+                    b.HasOne("MVC.Web.Models.Entities.Curso", "Curso")
                         .WithMany("Matriculas")
                         .HasForeignKey("IdCurso")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -157,17 +157,17 @@ namespace MVC.Web.Migrations
                     b.Navigation("Curso");
                 });
 
-            modelBuilder.Entity("MVC.Web.Models.Entitidades.Aluno", b =>
+            modelBuilder.Entity("MVC.Web.Models.Entities.Aluno", b =>
                 {
                     b.Navigation("Matriculas");
                 });
 
-            modelBuilder.Entity("MVC.Web.Models.Entitidades.Curso", b =>
+            modelBuilder.Entity("MVC.Web.Models.Entities.Curso", b =>
                 {
                     b.Navigation("Matriculas");
                 });
 
-            modelBuilder.Entity("MVC.Web.Models.Entitidades.Professor", b =>
+            modelBuilder.Entity("MVC.Web.Models.Entities.Professor", b =>
                 {
                     b.Navigation("Cursos");
                 });
